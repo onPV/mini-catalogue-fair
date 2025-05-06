@@ -13,7 +13,8 @@ services:
       - "5432:5432"
 
   backend:
-    image: php:8.2-fpm
+    build:  
+      context: ./backend
     container_name: symfony-backend
     working_dir: /var/www/backend
     volumes:
