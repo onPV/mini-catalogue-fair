@@ -1,5 +1,52 @@
+/*
 import Image from "next/image";
 import styles from "./page.module.css";
+*/
+
+type Protocol = {
+  id: number;
+  title: string;
+  objective: string;
+  createdAt: string;
+};
+
+export default async function Home() {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/protocols`, {
+    cache: "no-store", // pour éviter le cache dans Next.js App Router
+  });
+
+  const data = await res.json();
+  const protocols: Protocol[] = data["hydra:member"];
+
+  return (
+    <main>
+      <h1>Protocoles scientifiques</h1>
+      <ul>
+        {protocols.map((p) => (
+          <li key={p.id}>
+            <strong>{p.title}</strong> — {p.objective}
+          </li>
+        ))}
+      </ul>
+    </main>
+  );
+}
+
+
+
+
+
+
+/*
+export default function Home() {
+  return (
+    <main>
+      <h1>API Base URL :</h1>
+      <p>{process.env.NEXT_PUBLIC_API_BASE_URL}</p>
+    </main>
+  );
+}
+
 
 export default function Home() {
   return (
@@ -93,3 +140,4 @@ export default function Home() {
     </div>
   );
 }
+*/
