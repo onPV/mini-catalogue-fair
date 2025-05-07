@@ -3,6 +3,8 @@ import Image from "next/image";
 import styles from "./page.module.css";
 */
 
+import ProtocolCard from "./components/ProtocolCard";
+
 type Protocol = {
   id: number;
   title: string;
@@ -12,20 +14,18 @@ type Protocol = {
 
 export default async function Home() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/protocols`, {
-    cache: "no-store", // pour éviter le cache dans Next.js App Router
+    cache: "no-store",
   });
 
   const data = await res.json();
   const protocols: Protocol[] = data["hydra:member"];
 
   return (
-    <main>
-      <h1>Protocoles scientifiques</h1>
+    <main className="max-w-2xl mx-auto p-4">
+      <h1 className="text-2xl font-bold mb-4">Protocoles scientifiques</h1>
       <ul>
         {protocols.map((p) => (
-          <li key={p.id}>
-            <strong>{p.title}</strong> — {p.objective}
-          </li>
+          <ProtocolCard key={p.id} protocol={p} />
         ))}
       </ul>
     </main>
