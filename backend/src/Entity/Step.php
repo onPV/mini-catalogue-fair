@@ -15,8 +15,13 @@ class Step
     #[ORM\Column(type: 'integer')]
     private ?int $id = null;
 
-    #[ORM\Column(type: 'integer')]
+    /*#[ORM\Column(type: 'integer')]
     private int $order;
+    */
+
+    #[ORM\Column(name: 'step_order', type: 'integer')]
+    private int $stepOrder;
+
 
     #[ORM\Column(type: 'text')]
     private string $description;
@@ -30,8 +35,12 @@ class Step
 
     public function getId(): ?int { return $this->id; }
 
-    public function getOrder(): int { return $this->order; }
-    public function setOrder(int $order): self { $this->order = $order; return $this; }
+    /*public function getOrder(): int { return $this->order; }
+    public function setOrder(int $order): self { $this->order = $order; return $this; }*/
+
+    public function getStepOrder(): int { return $this->stepOrder; }
+    public function setStepOrder(int $order): self { $this->stepOrder = $order; return $this; }
+
 
     public function getDescription(): string { return $this->description; }
     public function setDescription(string $description): self { $this->description = $description; return $this; }
